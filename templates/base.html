@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>{% block title %}{% endblock %}</h3>
+            <h2>{% block subtitle %}{% endblock %}</h3>
+    </div>
+
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

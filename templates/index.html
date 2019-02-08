@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Currency Converter Lite
+{% endblock %}
+
+{% block subtitle %}
+Exchange Rates published by the <a
+    href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">European
+    Central Bank</a>
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('index') }}" method="POST">
+    <div class="form-group col-3">
+        <label for="amount-input">Amount</label>
+        <input type="number" step="0.01" class="form-control" id="amount-input" name="amount" placeholder="Enter amount">
+    </div>
+    <div class="form-group col-3">
+        <label for="source-select">Convert from:</label>
+        <select class="form-control" id="source-select" name="source">
+            {% for currency in currencies %}
+            <option>{{ currency }}</option>
+            <option selected="selected">EUR</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group col-3">
+        <label for="target-select">Convert to:</label>
+        <select class="form-control" id="target-select" name="target">
+            {% for currency in currencies %}
+            <option>{{ currency }}</option>
+            <option selected="selected">USD</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group col-2 control">
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </div>
+</form>
+<div class="row col-md-6" id="result">
+    <div style="border-top: 1px solid#888; padding-top:15px; font-size:150%">
+        {% if result %}
+        <p>{{ "%d %s equals %d %s" % (amount, source, result, target) }}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
